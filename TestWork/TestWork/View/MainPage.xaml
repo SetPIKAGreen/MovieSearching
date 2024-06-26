@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Command="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+
+
+
+
+             x:Class="TestWork.MainPage">
+
+    <StackLayout>
+        <Frame CornerRadius="20"
+               BackgroundColor="LightGray"
+               Padding="5"
+               HorizontalOptions="FillAndExpand"
+               Margin="0">
+
+            <StackLayout Orientation ="Vertical"
+                         HorizontalOptions="Fill">
+
+                <SearchBar HeightRequest="40"
+                           Placeholder="Поиск..."
+                           Text="{Binding SearchText, Mode=TwoWay}">
+
+                </SearchBar>
+
+
+
+                <StackLayout Orientation="Horizontal">
+
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="Center">
+
+                        <Switch x:Name="titleSwitch" IsToggled="{Binding TitleChecked, Mode=TwoWay}"  />
+                        <Label Text="фильм" 
+                               FontSize="Medium"/>
+
+
+                    </StackLayout>
+
+
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="Center">
+
+                        <Switch x:Name="actorSwitch" IsToggled="{Binding ActorChecked, Mode=TwoWay}" />
+                        <Label Text="актёр"
+                               FontSize="Medium"/>
+
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+
+
+                        <Picker Title="Жанр"
+                                ItemsSource="{Binding GenresList}"
+                                SelectedItem="{Binding SelectedGenre, Mode=TwoWay}">
+                        </Picker>
+
+
+
+
+
+                    </StackLayout>
+
+                </StackLayout>
+            </StackLayout>
+
+        </Frame>
+        <Frame BackgroundColor="Wheat" CornerRadius="20">
+            <CollectionView x:Name="moviesList"
+                            SelectionMode="Single"
+                            SelectionChanged="moviesList_SelectionChanged"
+                            ItemsSource="{Binding MoviesList}">
+                <CollectionView.ItemsLayout>
+
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame>
+                                <StackLayout HorizontalOptions="Start">
+                                    <Label Text="{Binding Title}" />
+                                    <Label Text="{Binding Genre}" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+    </StackLayout>
+
+</ContentPage>
